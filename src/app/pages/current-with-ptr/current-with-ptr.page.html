@@ -1,0 +1,49 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Current with PtR</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="top-card-container-bg">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Current with Pull-to-Refresh</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div>When we add a pull to refresh, we can see the reason why we need to change how the background works. When refreshing, there is a gap between the header and the content. This looks unacceptable to me. Maybe the gap could have a background that is similar, but I'm not sure how that would work.</div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  
+  
+  <ion-card *ngFor="let blah of [].constructor(8)">
+    <ion-card-header>
+      <ion-card-title>header/title</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque autem assumenda, amet ipsum inventore earum eveniet reiciendis, dolor accusamus non voluptate, temporibus expedita odio quibusdam distinctio repellendus tenetur deleniti hic.
+    </ion-card-content>
+  </ion-card>
+  
+  <div class="bottom-card-container-bg">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Bottom card with bg</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque autem assumenda, amet ipsum inventore earum eveniet reiciendis, dolor accusamus non voluptate, temporibus expedita odio quibusdam distinctio repellendus tenetur deleniti hic.
+      </ion-card-content>
+    </ion-card>
+  </div>
+  
+  
+</ion-content>

@@ -7,17 +7,13 @@ const routes: Routes = [
     redirectTo: 'current',
     pathMatch: 'full'
   },
-  // {
-  //   path: 'folder/:id',
-  //   loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-  // },
-  // {
-  //   path: 'bar',
-  //   loadChildren: () => import('./foo/bar/bar.module').then( m => m.BarPageModule)
-  // },
   {
     path: 'current',
     loadChildren: () => import('./pages/current/current.module').then( m => m.CurrentPageModule)
+  },
+  {
+    path: 'current-with-ptr',
+    loadChildren: () => import('./pages/current-with-ptr/current-with-ptr.module').then( m => m.CurrentWithPtRPageModule)
   },
   {
     path: 'bg-on-content',
