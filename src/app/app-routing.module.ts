@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'bg-on-content-ptr',
     loadChildren: () => import('./pages/bg-on-content-ptr/bg-on-content-ptr.module').then( m => m.BgOnContentPtRPageModule)
   },
+  {
+    path: 'not-custom-property',
+    loadChildren: () => import('./pages/not-custom-property/not-custom-property.module').then( m => m.NotCustomPropertyPageModule)
+  },
 ];
 
 @NgModule({

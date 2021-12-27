@@ -1,0 +1,26 @@
+ion-toolbar {
+  --background: no-repeat center top url('/assets/bg-top.svg');
+}
+
+ion-content {
+  // We have to turn off all the regular bg stuff for the Custom Property...
+  --background: none;
+  //...and then add it back to the regular CSS background.
+  background:
+    url('/assets/bg-top.svg') no-repeat center calc(-44px) local,
+    url('/assets/bg-bottom.svg') no-repeat center bottom local;
+
+  .transparent {
+    background-color: rgba(255, 255, 255, 0.50);
+  }
+}
+
+ion-refresher {
+  // This z-index defaults to -1, but then it's behind the background.
+  // What could changing the z-index mess up?
+  // It looks like the arrow shows up over the content, but it's not that bad.
+  z-index: 0;
+  // We can see where the referesher overlaps the content by adding an outline.
+  // It looks worse with text in the ion-refresher-content.
+  outline: 1px solid blue;
+}

@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Bg on Content & PtR</ion-title>
+    <ion-title>Not Custom Property</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,15 +11,22 @@
 
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
+    <!-- Adding text makes the z-index issue look much worse. It looks fine with just icons.  -->
+    <!-- <ion-refresher-content
+      pullingText="Pull to refresh"
+      refreshingText="Refreshing...">
+    </ion-refresher-content> -->
   </ion-refresher>
 
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Bg on Content & PtR (still <code style="white-space: nowrap;">--background</code>)</ion-card-title>
+      <ion-card-title>Not using <code style="white-space: nowrap;">--background</code></ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <div>This is the worst-of-both-worlds. The background is fixed so it doesn't scroll with the content. But when we Pull-to-Refresh, we still see the gap between header and content.</div>
-      <div>I want the opposite of this to happen; scroll the bg up with the content, but make it stay in place when pulling down.</div>
+      <div>If we turn of all of the <code>--background</code> custom property stuff and use the regular CSS background, we something that works pretty well. The background doesn't scroll up, but the Pull-to-Refresh looks nice without the gap appearing.</div>
+      <div>The blue line is just to show some of the z-index stuff.</div>
+      <div>The z-index of the ion-refresher had to be moved up so it's above the bg. This looks fine with just icons. We can see the icon overlap and appear above the content if we pull slowly. This still looks fine even when you notice it and most users will pull quickly.</div>
+      <div>But this looks bad with text in ion-refresher-content.</div>
     </ion-card-content>
   </ion-card>
   
