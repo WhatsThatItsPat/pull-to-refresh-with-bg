@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'bg-on-content',
     loadChildren: () => import('./pages/bg-on-content/bg-on-content.module').then( m => m.BgOnContentPageModule)
   },
+  {
+    path: 'bg-on-content-ptr',
+    loadChildren: () => import('./pages/bg-on-content-ptr/bg-on-content-ptr.module').then( m => m.BgOnContentPtRPageModule)
+  },
 ];
 
 @NgModule({

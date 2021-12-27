@@ -21,13 +21,12 @@
               <ion-label>Move BGs to content</ion-label>
             </ion-item>
           </ion-menu-toggle>
-
-          <!-- <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
-              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
+          
+          <ion-menu-toggle auto-hide="false">
+            <ion-item routerDirection="root" [routerLink]="'bg-on-content-ptr'" lines="none" detail="false" routerLinkActive="selected">
+              <ion-label>BGs to content & PtR</ion-label>
             </ion-item>
-          </ion-menu-toggle> -->
+          </ion-menu-toggle>
 
         </ion-list>
 

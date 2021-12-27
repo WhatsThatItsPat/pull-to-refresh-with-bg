@@ -1,0 +1,46 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Bg on Content & PtR</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Bg on Content & PtR (still <span style="white-space: nowrap;">--background</span>)</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div>This is the worst-of-both-worlds. The background is fixed so it doesn't scroll with the content. But when we Pull-to-Refresh, we still see the gap between header and content.</div>
+      <div>I want the opposite of this to happen; scroll the bg up with the content, but make it stay in place when pulling down.</div>
+    </ion-card-content>
+  </ion-card>
+  
+  
+  <ion-card *ngFor="let blah of [].constructor(8)" class="transparent">
+    <ion-card-header>
+      <ion-card-title>header/title</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque autem assumenda, amet ipsum inventore earum eveniet reiciendis, dolor accusamus non voluptate, temporibus expedita odio quibusdam distinctio repellendus tenetur deleniti hic.
+    </ion-card-content>
+  </ion-card>
+  
+  <!-- <ion-card>
+    <ion-card-header>
+      <ion-card-title>Bottom card</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque autem assumenda, amet ipsum inventore earum eveniet reiciendis, dolor accusamus non voluptate, temporibus expedita odio quibusdam distinctio repellendus tenetur deleniti hic.
+    </ion-card-content>
+  </ion-card> -->
+  
+  
+</ion-content>
