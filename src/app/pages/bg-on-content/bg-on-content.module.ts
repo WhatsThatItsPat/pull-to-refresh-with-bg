@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FolderPageRoutingModule } from './folder-routing.module';
+import { BgOnContentPageRoutingModule } from './bg-on-content-routing.module';
 
-import { FolderPage } from './folder.page';
+import { BgOnContentPage } from './bg-on-content.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FolderPageRoutingModule
+    BgOnContentPageRoutingModule
   ],
-  declarations: [FolderPage]
+  declarations: [BgOnContentPage]
 })
-export class FolderPageModule {}
+export class BgOnContentPageModule {}

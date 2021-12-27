@@ -18,7 +18,11 @@ const routes: Routes = [
   {
     path: 'current',
     loadChildren: () => import('./pages/current/current.module').then( m => m.CurrentPageModule)
-  }
+  },
+  {
+    path: 'bg-on-content',
+    loadChildren: () => import('./pages/bg-on-content/bg-on-content.module').then( m => m.BgOnContentPageModule)
+  },
 ];
 
 @NgModule({

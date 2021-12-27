@@ -9,6 +9,12 @@
               <ion-label>Current</ion-label>
             </ion-item>
           </ion-menu-toggle>
+          
+          <ion-menu-toggle auto-hide="false">
+            <ion-item routerDirection="root" [routerLink]="'bg-on-content'" lines="none" detail="false" routerLinkActive="selected">
+              <ion-label>bg-on-content</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
 
           <!-- <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
