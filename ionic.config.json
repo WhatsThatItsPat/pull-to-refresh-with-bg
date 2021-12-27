@@ -1,0 +1,7 @@
+{
+  "name": "pull-to-refresh-with-bg",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
