@@ -1,0 +1,58 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>::part Pseudo El</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <!-- <ion-refresher-content></ion-refresher-content> -->
+    <!-- Adding text makes the z-index issue look much worse. It looks fine with just icons.  -->
+    <ion-refresher-content
+      pullingText="Pull to refresh"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title><code>::part</code> pseudo element</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div>This is pretty good. We can target <code>ion-content::part(scroll)</code> and change it's z-index. This way our layers are in order:
+        <ol>
+          <li>scroll content</li>
+          <li>refresher</li>
+          <li>background</li>
+        </ol>
+      </div>
+      <div>We can even bring back the extra refresher text, though I don't like it.</div>
+      <div>We can also use <code>::part(scroll)</code> to attach the bottom bg to the content so it scrolls into view and let's the user know they've reached the bottom.</div>
+    </ion-card-content>
+  </ion-card>
+  
+  
+  <ion-card *ngFor="let blah of [].constructor(8)" class="transparent">
+    <ion-card-header>
+      <ion-card-title>header/title</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque autem assumenda, amet ipsum inventore earum eveniet reiciendis, dolor accusamus non voluptate, temporibus expedita odio quibusdam distinctio repellendus tenetur deleniti hic.
+    </ion-card-content>
+  </ion-card>
+  
+  <!-- <ion-card>
+    <ion-card-header>
+      <ion-card-title>Bottom card</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque autem assumenda, amet ipsum inventore earum eveniet reiciendis, dolor accusamus non voluptate, temporibus expedita odio quibusdam distinctio repellendus tenetur deleniti hic.
+    </ion-card-content>
+  </ion-card> -->
+  
+  
+</ion-content>

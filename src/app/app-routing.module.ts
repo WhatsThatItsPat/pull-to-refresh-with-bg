@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'not-custom-property',
     loadChildren: () => import('./pages/not-custom-property/not-custom-property.module').then( m => m.NotCustomPropertyPageModule)
   },
+  {
+    path: 'part-pseudo',
+    loadChildren: () => import('./pages/part-pseudo/part-pseudo.module').then( m => m.PartPseudoPageModule)
+  },
 ];
 
 @NgModule({
