@@ -1,0 +1,69 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Bg Swap</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [class.app-refresher-active]="refresherProgress !== 0">
+
+  <!-- <div slot="fixed" style="background-color: blueviolet; width: 100%;">I could probably put the bg here and manipulate it while scrolling (if it's too hard to transform the bg elsewhere). And it would be worth trying a couple ways to compare performance.</div> -->
+
+  <div class="bg-top">
+    <!-- TODO good place for a big comment explaining things. -->
+  </div>
+
+  <ion-refresher
+    slot="fixed"
+    (ionRefresh)="doRefresh($event)"
+    (ionPull)="doPull($event)"
+    (ionStart)="doStart($event)"
+  >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Bg Swap</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+      <div>refresherProgress: {{refresherProgress?.toFixed(5)}} <br></div>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="transparent">
+    <ion-card-header>
+      <ion-card-title>more...</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div>This works pretty well. The content bg is in two places. It's on a div in the content (which scrolls) and on the content itself (which stays at the top). We watch the refresher events and swap which bg is on with a class.</div>
+      <div>The only issue is if you drag down without completing and drag back up without releasing, you see a white line/box. It's swapping the bgs too early, but I could live with this.</div>
+      <div>The refresher doesn't have an ionEnd event. So instead, we watch start an interval with ionStart, and then clear it when refresherProgress hits zero. But zero doesn't necessarly mean the user is done dragging up and down. If they pull down again, the swap won't happen and things break a bit. To fix that, we cancel the refresher when it hits zero.</div>
+    </ion-card-content>
+  </ion-card>
+  
+  
+  <ion-card *ngFor="let blah of [].constructor(8)" class="transparent">
+    <ion-card-header>
+      <ion-card-title>header/title</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque autem assumenda, amet ipsum inventore earum eveniet reiciendis, dolor accusamus non voluptate, temporibus expedita odio quibusdam distinctio repellendus tenetur deleniti hic.
+    </ion-card-content>
+  </ion-card>
+  
+  <!-- <ion-card>
+    <ion-card-header>
+      <ion-card-title>Bottom card</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque autem assumenda, amet ipsum inventore earum eveniet reiciendis, dolor accusamus non voluptate, temporibus expedita odio quibusdam distinctio repellendus tenetur deleniti hic.
+    </ion-card-content>
+  </ion-card> -->
+  
+  
+</ion-content>

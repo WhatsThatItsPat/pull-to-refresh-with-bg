@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'part-pseudo',
     loadChildren: () => import('./pages/part-pseudo/part-pseudo.module').then( m => m.PartPseudoPageModule)
   },
+  {
+    path: 'bg-swap',
+    loadChildren: () => import('./pages/bg-swap/bg-swap.module').then( m => m.BgSwapPageModule)
+  },
 ];
 
 @NgModule({

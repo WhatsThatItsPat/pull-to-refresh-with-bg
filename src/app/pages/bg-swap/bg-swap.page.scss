@@ -1,0 +1,56 @@
+ion-toolbar {
+  // Just a note that using custom properties here is fine.
+  // TODO this could probably be set globally, though the manipulations
+  // we'll have to do for the content bg probably have to be in the
+  // component, so it might make sense to keep this here too.
+  --background: no-repeat center top url('/assets/bg-top.svg');
+}
+
+ion-content {
+  // We have to turn off all the regular bg stuff for the Custom Property...
+  --background: none;
+  
+  // Now we set the bg on an absolutly positioned div which will scroll with the content.
+  .bg-top {
+    position: absolute;
+    width: 100%;
+    height: 460px;
+    background: url('/assets/bg-top.svg') no-repeat center calc(-44px);
+  }
+
+  // And then we add the bg when the refresher is active and hide the scrolling version.
+  // This class is added by watching the refresher events.
+  &.app-refresher-active {
+    background: url('/assets/bg-top.svg') no-repeat center calc(-44px);
+    .bg-top {
+      visibility: hidden;
+    }
+  }
+  
+
+  // We can target the 'scroll' part within the shadow root of ion-content
+  &::part(scroll) {
+    // We can set this z-index above ion-refresher so the icon doesn't show
+    z-index: 1;
+    // We can also attach the bottom bg image to the bottom of the page.
+    background: url('/assets/bg-bottom.svg') no-repeat center bottom local;
+  }
+
+  // just to see through the cards
+  .transparent {
+    background-color: rgba(255, 255, 255, 0.50);
+  }
+  
+}
+
+
+
+ion-refresher {
+  // This z-index defaults to -1, but then it's behind the background.
+  // What could changing the z-index mess up?
+  // It looks like the arrow shows up over the content, but it's not that bad.
+  z-index: 0;
+  // We can see where the referesher overlaps the content by adding an outline.
+  // It looks worse with text in the ion-refresher-content.
+  // outline: 1px solid blue;
+}
