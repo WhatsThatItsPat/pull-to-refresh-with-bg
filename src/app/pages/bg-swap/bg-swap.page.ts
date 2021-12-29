@@ -58,8 +58,4 @@ export class BgSwapPage implements OnInit, AfterViewInit {
     });
   }
 
-  doPress(event){
-    console.log('press?');
-  }
-
 }

@@ -35,6 +35,10 @@ const routes: Routes = [
     path: 'bg-swap',
     loadChildren: () => import('./pages/bg-swap/bg-swap.module').then( m => m.BgSwapPageModule)
   },
+  {
+    path: 'bg-scroll',
+    loadChildren: () => import('./pages/bg-scroll/bg-scroll.module').then( m => m.BgScrollPageModule)
+  },
 ];
 
 @NgModule({

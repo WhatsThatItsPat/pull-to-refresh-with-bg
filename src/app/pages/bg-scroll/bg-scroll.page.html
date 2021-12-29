@@ -1,0 +1,75 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Bg Scroll</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" (ionScroll)="doScrolling($event)">
+
+  <div slot="fixed" class="bg-scroll" #bg>
+  <!-- <div class="bg-scroll" #bg> -->
+    <!-- I could probably put the bg here and manipulate it while scrolling (if it's too hard to transform the bg elsewhere). And it would be worth trying a couple ways to compare performance. -->
+    <!-- TODO good place for a big comment explaining things. -->
+  </div>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Bg Scroll</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button expand="block" (click)="scrollToBottom()">bottom</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="transparent">
+    <ion-card-header>
+      <ion-card-title>more...</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div>This might be it. Everything works and is layered as expected. It's less hacky than watching refresher events.</div>
+      <div>Instead of swapping between fixed and scrolling bgs, there's one fixed div which has a background that we move dynamically based on scroll position.</div>
+      <div>The div has the `slot` attribute set to `fixed` which pulls it out of the scrolling content.</div>
+      <div>`scrollEvents` are turned on for `ion-content` which is the iffy part of this because it could affect performanc (and this is part of the performance perceptin epic after all). But we're using the DomController so the renders should be performant.</div>
+      <div>This gives us the opportunity to use a slick parallax effect so the bg moves slower than the content. Really, we are forced into it because there's a slight delay when trying to move at the same speed.</div>
+    </ion-card-content>
+  </ion-card>
+  
+  
+  <ion-card *ngFor="let blah of [].constructor(8)" class="transparent">
+    <ion-card-header>
+      <ion-card-title>header/title</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque autem assumenda, amet ipsum inventore earum eveniet reiciendis, dolor accusamus non voluptate, temporibus expedita odio quibusdam distinctio repellendus tenetur deleniti hic.
+    </ion-card-content>
+  </ion-card>
+  
+  <!-- <ion-card>
+    <ion-card-header>
+      <ion-card-title>Bottom card</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque autem assumenda, amet ipsum inventore earum eveniet reiciendis, dolor accusamus non voluptate, temporibus expedita odio quibusdam distinctio repellendus tenetur deleniti hic.
+    </ion-card-content>
+  </ion-card> -->
+
+  
+  <ion-card class="transparent">
+    <ion-card-header>
+      <ion-card-title>Bg Scroll</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button expand="block" (click)="scrollToTop()">top</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  
+  
+</ion-content>

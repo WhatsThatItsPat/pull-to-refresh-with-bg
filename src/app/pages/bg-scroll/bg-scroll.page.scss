@@ -7,26 +7,22 @@ ion-toolbar {
 }
 
 ion-content {
-  // We have to turn off all the regular bg stuff for the Custom Property...
+  /**
+   * We had to set the `--background` Custom Property to `none` in
+   * order to use the standard CSS `background`, but I don't think
+   * it's necessary anymore because the top bg is in a fixed div
+   * and the bottom bg is in `part(scroll)`...but probably doesn't hurt.
+   */
   --background: none;
   
-  // Now we set the bg on an absolutly positioned div which will scroll with the content.
-  .bg-top {
-    position: absolute;
+  .bg-scroll {
     width: 100%;
-    height: 460px;
-    background: url('/assets/bg-top.svg') no-repeat center calc(-44px);
+    // This height doesn't matter as long as it's taller than the bg image.
+    // height: 504px;
+    height: 100%;
+    margin-top: -44px; // set this instead of a confusing calc()?
+    background: url('/assets/bg-top.svg') no-repeat center top;
   }
-
-  // And then we add the bg when the refresher is active and hide the scrolling version.
-  // This class is added by watching the refresher events.
-  &.app-refresher-active {
-    background: url('/assets/bg-top.svg') no-repeat center calc(-44px);
-    .bg-top {
-      visibility: hidden;
-    }
-  }
-  
 
   // We can target the 'scroll' part within the shadow root of ion-content
   &::part(scroll) {
@@ -47,5 +43,4 @@ ion-refresher {
   // This z-index defaults to -1, but then it's behind the background.
   // What could changing the z-index mess up?
   z-index: 0;
-  // outline: 1px solid blue;
 }
