@@ -26,8 +26,9 @@ export class BgScrollDirective implements OnInit {
          */
         this.renderer.setStyle(this.bg, 'background-position-y', `${-top * 0.6}px`);
 
-        // would changing the bg top / transform3d be more performant?
-        // this.renderer.setStyle(this.bg.nativeElement, 'top', `${-top*.6}px`);
+        // Would changing the bg top / transform3d be more performant? I don't see a difference.
+        // this.renderer.setStyle(this.bg, 'top', `${-top * 0.6}px`);
+        // this.renderer.setStyle(this.bg, 'transform', `translate3d(0, ${-top * 0.6}px, 0)`);
       } else {
         // Can this go below 0? Maybe when there's no refresher?
         this.renderer.setStyle(this.bg, 'background-position-y', `0px`);
