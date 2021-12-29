@@ -11,9 +11,7 @@ export class BgScrollDirective implements OnInit {
   constructor(
     private domCtrl: DomController,
     private renderer: Renderer2
-  ) {
-    console.log(`appBgScroll>constructor`, this.bg);
-  }
+  ) {}
 
   @HostListener('ionScroll', ['$event']) onContentScroll(event: ScrollCustomEvent) {
     const top = event.detail.scrollTop;
@@ -26,19 +24,19 @@ export class BgScrollDirective implements OnInit {
          * in fact, we have to because otherwise it just looks like it has a
          * slight delay and is a hair behind the scrolling.
          */
-        this.renderer.setStyle(this.bg, 'background-position-y', `${-top*.6}px`);
+        this.renderer.setStyle(this.bg, 'background-position-y', `${-top * 0.6}px`);
 
         // would changing the bg top / transform3d be more performant?
         // this.renderer.setStyle(this.bg.nativeElement, 'top', `${-top*.6}px`);
       } else {
-        // can this go below 0?
+        // Can this go below 0? Maybe when there's no refresher?
         this.renderer.setStyle(this.bg, 'background-position-y', `0px`);
       }
     });
   }
 
   ngOnInit(): void {
-    console.log(`appBgScroll>ngOnInit`, this.bg);
+    // console.log(`appBgScroll>ngOnInit`, this.bg);
     /**
      * might need this.domCtrl.read() to get the toolbar height if I want to
      * build that into the scrolling equation:

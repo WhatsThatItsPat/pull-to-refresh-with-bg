@@ -39,8 +39,9 @@ ion-content {
   
 }
 
-ion-refresher {
-  // This z-index defaults to -1, but then it's behind the background.
+.ios ion-refresher {
+  // This z-index defaults to -1 (on iOS), but then it's behind the background.
   // What could changing the z-index mess up?
   z-index: 0;
+  // On Android the default is z-index:1 and we don't want to change it.
 }

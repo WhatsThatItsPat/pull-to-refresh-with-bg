@@ -27,24 +27,21 @@ export class BgSwapPage implements OnInit, AfterViewInit {
     return await this.refresher.getProgress();
   }
 
-  // doRefresh(event){
-  // doRefresh(event: CustomEvent<RefresherEventDetail>){
-  // doRefresh(event: CustomEvent<RefresherCustomEvent>) {
-  doRefresh(event: RefresherCustomEvent){
+  doRefresh(event){
     console.log(`refresher in doRefresh`, this.refresher);
     // console.log(`...refreshing`, event);
     setTimeout(() => {
       console.log('refreshing complete');
-      event.target.complete();
+      (event as RefresherCustomEvent).target.complete();
     }, 2000);
   }
 
-  doPull(event: RefresherCustomEvent){
-    // console.log(`...pulling`, event);
+  doPull(event){
+    // console.log(`...pulling`, (event as RefresherCustomEvent));
   }
 
-  doStart(event: RefresherCustomEvent){
-    console.log(`...start`, event);
+  doStart(event){
+    console.log(`...start`, (event as RefresherCustomEvent));
 
     this.refresherInterval = setInterval(async () => {
       this.refresherProgress = await this.refresher.getProgress();

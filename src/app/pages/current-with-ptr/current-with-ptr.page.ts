@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RefresherCustomEvent } from '@ionic/angular';
 
 @Component({
   selector: 'app-current-with-ptr',
@@ -16,7 +17,7 @@ export class CurrentWithPtRPage implements OnInit {
     console.log(`...refreshing`);
     setTimeout(() => {
       console.log('refreshing complete');
-      event.target.complete();
+      (event as RefresherCustomEvent).target.complete();
     }, 2000);
   }
 

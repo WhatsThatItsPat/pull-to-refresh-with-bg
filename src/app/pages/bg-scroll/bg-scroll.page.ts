@@ -17,7 +17,7 @@ export class BgScrollPage implements OnInit {
   }
 
   doRefresh(event){
-    console.log(`...refreshing`, event);
+    // console.log(`...refreshing`, event);
     setTimeout(() => {
       console.log('refreshing complete');
       (event as RefresherCustomEvent).target.complete();
