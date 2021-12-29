@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { BgScrollPageRoutingModule } from './bg-scroll-routing.module';
 
 import { BgScrollPage } from './bg-scroll.page';
+import { BgScrollDirective } from 'src/app/bg-scroll.directive';
 
 @NgModule({
   imports: [
@@ -15,6 +16,10 @@ import { BgScrollPage } from './bg-scroll.page';
     IonicModule,
     BgScrollPageRoutingModule
   ],
-  declarations: [BgScrollPage]
+  declarations: [
+    BgScrollPage,
+    BgScrollDirective
+  ],
+  exports: [BgScrollDirective]
 })
 export class BgScrollPageModule {}

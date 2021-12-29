@@ -7,11 +7,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [scrollEvents]="true" (ionScroll)="doScrolling($event)">
+<ion-content scrollEvents="true" [appBgScroll]="bg">
 
-  <div slot="fixed" class="bg-scroll" #bg>
-  <!-- <div class="bg-scroll" #bg> -->
-    <!-- I could probably put the bg here and manipulate it while scrolling (if it's too hard to transform the bg elsewhere). And it would be worth trying a couple ways to compare performance. -->
+  <div id="bg" #bg slot="fixed">
     <!-- TODO good place for a big comment explaining things. -->
   </div>
 
@@ -33,7 +31,7 @@
       <ion-card-title>more...</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <div>This might be it. Everything works and is layered as expected. It's less hacky than watching refresher events.</div>
+      <div>This might be it. Everything works and is layered as expected. It's less hacky than watching refresher events. And the scrolling logic is tucked away in a directive.</div>
       <div>Instead of swapping between fixed and scrolling bgs, there's one fixed div which has a background that we move dynamically based on scroll position.</div>
       <div>The div has the `slot` attribute set to `fixed` which pulls it out of the scrolling content.</div>
       <div>`scrollEvents` are turned on for `ion-content` which is the iffy part of this because it could affect performanc (and this is part of the performance perceptin epic after all). But we're using the DomController so the renders should be performant.</div>
