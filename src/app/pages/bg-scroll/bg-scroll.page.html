@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Bg Scroll</ion-title>
+    <ion-title>BG Scroll</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -36,7 +36,7 @@
 
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Bg Scroll</ion-card-title>
+      <ion-card-title>BG Scroll</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-button expand="block" (click)="scrollToBottom()">bottom</ion-button>
@@ -51,8 +51,9 @@
       <div>This might be it. Everything works and is layered as expected. It's less hacky than watching refresher events. And the scrolling logic is tucked away in a directive.</div>
       <div>Instead of swapping between fixed and scrolling bgs, there's one fixed div which has a background that we move dynamically based on scroll position.</div>
       <div>The div has the `slot` attribute set to `fixed` which pulls it out of the scrolling content.</div>
-      <div>`scrollEvents` are turned on for `ion-content` which is the iffy part of this because it could affect performanc (and this is part of the performance perceptin epic after all). But we're using the DomController so the renders should be performant.</div>
-      <div>This gives us the opportunity to use a slick parallax effect so the bg moves slower than the content. Really, we are forced into it because there's a slight delay when trying to move at the same speed.</div>
+      <div>`scrollEvents` are turned on for `ion-content` which is the iffy part of this because it could affect performance (and this is part of the performance perception epic after all). But we're using the DomController so the renders should be performant.</div>
+      <div>This gives us the opportunity to use a slick parallax effect so the bg moves slower than the content (really, we are forced into it because there's a slight but noticeable lag when trying to move the bg at the same speed as the content).</div>
+      <div>The bottom bg is still attached to the bottom with the scroll shadow part, but it could be parallax as well.</div>
     </ion-card-content>
   </ion-card>
   
@@ -69,7 +70,7 @@
   
   <ion-card class="transparent">
     <ion-card-header>
-      <ion-card-title>Bg Scroll</ion-card-title>
+      <ion-card-title>BG Scroll</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-button expand="block" (click)="scrollToTop()">top</ion-button>

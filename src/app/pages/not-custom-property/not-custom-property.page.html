@@ -23,7 +23,8 @@
       <ion-card-title>Not using <code style="white-space: nowrap;">--background</code></ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <div>If we turn of all of the <code>--background</code> custom property stuff and use the regular CSS background, we something that works pretty well. The background doesn't scroll up, but the Pull-to-Refresh looks nice without the gap appearing.</div>
+      <div>If we turn off the <code>--background</code> custom property and use the regular CSS background, we get something that works pretty well. The background doesn't scroll up, but the Pull-to-Refresh looks nice without the gap appearing.</div>
+      <div>We could consider getting rid of the bottom bg altogether and doing it this way.</div>
       <div>The blue line is just to show some of the z-index stuff.</div>
       <div>The z-index of the ion-refresher had to be moved up so it's above the bg. This looks fine with just icons. We can see the icon overlap and appear above the content if we pull slowly. This still looks fine even when you notice it and most users will pull quickly.</div>
       <div>But this looks bad with text in ion-refresher-content.</div>

@@ -1,3 +1,12 @@
+ion-card-content {
+  div {
+    padding-bottom: 1rem;
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+}
+
 ion-toolbar {
   --background: no-repeat center top url('/assets/bg-top.svg');
 }
@@ -21,4 +30,8 @@ ion-toolbar {
     margin-bottom: 0;
     background-color: rgba(255, 255, 255, 0.50);
   }
+}
+
+ion-refresher {
+  // background-color: rgb(214, 94, 15);
 }
