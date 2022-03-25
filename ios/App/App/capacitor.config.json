@@ -1,0 +1,6 @@
+{
+	"appId": "com.whatsthatitspat.pull_to_refresh_with_bg",
+	"appName": "pull-to-refresh-with-bg",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
