@@ -49,7 +49,6 @@ export class BgSwapPage implements OnInit, AfterViewInit {
         // TODO also need to know if the user has ended the touch
         // cancelling it kind of fixes that, but introduces a white line
         this.refresher.cancel();
-
         clearInterval(this.refresherInterval);
       }
     });
