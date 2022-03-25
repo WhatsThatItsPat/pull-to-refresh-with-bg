@@ -21,7 +21,10 @@
     (ionPull)="doPull($event)"
     (ionStart)="doStart($event)"
   >
-    <ion-refresher-content></ion-refresher-content>
+    <!-- <ion-refresher-content></ion-refresher-content> -->
+
+    <ion-refresher-content pullingIcon="arrow-down-outline" refreshingSpinner="circular"></ion-refresher-content>
+
   </ion-refresher>
 
   <ion-card>

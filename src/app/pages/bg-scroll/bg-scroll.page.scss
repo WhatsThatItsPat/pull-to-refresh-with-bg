@@ -29,7 +29,11 @@ ion-content {
     // This height doesn't matter as long as it's taller than the bg image.
     // height: 504px;
     height: 100%;
-    margin-top: -44px; // set this instead of a confusing calc()?
+
+    // I think we want to separate the calc from the background because
+    // we are moving it around. This is probably different if we are moving
+    // the bg div rather than the background.
+    margin-top: calc(-44px - env(safe-area-inset-top));
     background: url('/assets/bg-top.svg') no-repeat center top;
   }
 

@@ -10,12 +10,17 @@
 <ion-content>
 
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
+    <!-- <ion-refresher-content></ion-refresher-content> -->
     <!-- Adding text makes the z-index issue look much worse. It looks fine with just icons.  -->
     <!-- <ion-refresher-content
       pullingText="Pull to refresh"
       refreshingText="Refreshing...">
     </ion-refresher-content> -->
+
+    <!--
+      This isn't as bad as the remarks in bg-on-content-ptr. There's still an occational flicker.
+    -->
+    <ion-refresher-content pullingIcon="arrow-down-outline" refreshingSpinner="circular"></ion-refresher-content>
   </ion-refresher>
 
   <ion-card>

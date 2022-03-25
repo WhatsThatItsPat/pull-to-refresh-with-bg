@@ -10,7 +10,19 @@
 <ion-content>
 
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
+    <!--
+      There's a difference between using ion-refresher-content without any customiztions
+      and with customizations. The former might use the native refresher. I can't see a
+      difference in the browser (except for the different icons), but it's a big difference
+      on my iPhone.
+
+      The uncustomized/native one works well on the iPhone. The background doesn't split (which
+      is not what I see in the browser), nor does it scroll. The icons are also grey.
+
+      The customized one is awful. The background splits, disappears, and flickers.
+    -->
+    <!-- <ion-refresher-content></ion-refresher-content> -->
+    <ion-refresher-content pullingIcon="arrow-down-outline" refreshingSpinner="circular"></ion-refresher-content>
   </ion-refresher>
 
   <ion-card>

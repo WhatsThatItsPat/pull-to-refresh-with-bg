@@ -11,11 +11,30 @@
 
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <!-- <ion-refresher-content></ion-refresher-content> -->
-    <!-- The extra text looks OK when behind the content, though I still think it's unnecessary. -->
-    <ion-refresher-content
+    <!--
+      The extra text looks OK when behind the content, though I still think it's unnecessary.
+
+      Here's another weird difference between browser and device. I don't see the extra text
+      on the device, only in the browser. Only when I change the default icons do I see the
+      text on the device (that must be what switches it away from the native one.)
+    -->
+    <!-- <ion-refresher-content
       pullingText="Pull to refresh"
       refreshingText="Refreshing...">
-    </ion-refresher-content>
+    </ion-refresher-content> -->
+
+    <!-- <ion-refresher-content
+      pullingText="Pull to refresh"
+      refreshingText="Refreshing..."
+      pullingIcon="arrow-down-outline"
+      refreshingSpinner="circular"
+    ></ion-refresher-content> -->
+
+    <ion-refresher-content
+      pullingIcon="arrow-down-outline"
+      refreshingSpinner="circular"
+    ></ion-refresher-content>
+    
   </ion-refresher>
 
   <ion-card>
