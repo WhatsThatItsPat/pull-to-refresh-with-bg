@@ -20,9 +20,11 @@ ion-content {
    * We had to set the `--background` Custom Property to `none` in
    * order to use the standard CSS `background`, but I don't think
    * it's necessary anymore because the top bg is in a fixed div
-   * and the bottom bg is in `part(scroll)`...but probably doesn't hurt.
+   * and the bottom bg is in `part(scroll)`.
+   * Also, setting it to none cause the bg to be black on an iOS
+   * device, even after the dark mode styles have been turned off.
    */
-  --background: none;
+  // --background: none;
   
   #bg {
     width: 100%;
