@@ -17,9 +17,9 @@ ion-content {
   //...and then add it back to the regular CSS background.
   background: url('/assets/bg-top.svg') no-repeat center calc(-44px - env(safe-area-inset-top)) local;
   
-  .transparent {
-    background-color: rgba(255, 255, 255, 0.50);
-  }
+  // .transparent {
+  //   background-color: rgba(255, 255, 255, 0.50);
+  // }
   
   // We can target the 'scroll' part within the shadow root of ion-content
   &::part(scroll) {
