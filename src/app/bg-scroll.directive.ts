@@ -1,63 +1,183 @@
-import { Directive, ElementRef, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
-import { DomController, ScrollCustomEvent } from '@ionic/angular';
+import { AfterViewInit, Directive, ElementRef, HostListener, OnInit, Renderer2 } from '@angular/core';
+import { DomController, IonContent, ScrollCustomEvent } from '@ionic/angular';
 
 @Directive({
   selector: '[appBgScroll]'
 })
-export class BgScrollDirective implements OnInit {
+export class BgScrollDirective implements OnInit, AfterViewInit {
 
-  @Input('appBgScroll') bg: HTMLDivElement;
+  // @Input('appBgScroll') bg: HTMLDivElement;
+  content: IonContent;
+  background: HTMLDivElement;
+
 
   constructor(
     private domCtrl: DomController,
     private renderer: Renderer2,
     private el: ElementRef,
   ) {
-    console.log(`nativeElement`, this.el.nativeElement);
-    console.log(`parentNode`, this.el.nativeElement.parentNode);
-    console.log(`attributes`, this.el.nativeElement.attributes);
-    console.log(`getContentAttr in constructor`, this.getContentAttr());
 
-    const newDiv = this.renderer.createElement('div');
-    this.renderer.setAttribute(newDiv, 'slot', 'fixed');
-    this.renderer.setAttribute(newDiv, this.getContentAttr(), '');
-    this.renderer.addClass(newDiv, 'howdy');
-    const newText = this.renderer.createText('howdy');
-    this.renderer.appendChild(newDiv, newText);
-    this.renderer.appendChild(this.el.nativeElement, newDiv);
+    // console.log(`nativeElement`, this.el.nativeElement);
+    // console.log(`parentNode`, this.el.nativeElement.parentNode);
+    // console.log(`attributes`, this.el.nativeElement.attributes);
+    // console.log(`getContentAttr in constructor`, this.getContentAttr());
+
+    /**
+     * This directive is attached to an `ion-content` whose scroll events
+     * need to be turned on with `scrollEvents="true"`.
+     */
+    this.content = this.el.nativeElement;
+
+    /**
+     * Turn on scroll events here so we don't have to do it in the template:
+     *    `<ion-content scrollEvents="true">`
+     */
+    this.renderer.setProperty(this.content, 'scrollEvents', 'true');
+
+    /**
+     * Dynamically create a div to hold the background so we don't have
+     * to do it in every page.
+     *
+     * TODO Consider creating sub divs for top and bottom backgrounds.
+     * I'm currently just using this div for both backgrounds. And using
+     * ::before & ::after should work for more complicated situations.
+     * But sub divs might help.
+     */
+    this.background = this.renderer.createElement('div');
+
+    /**
+     * Use Ionic's `slot="fixed"` attribute to pull it out of the
+     * scrollable area: https://ionicframework.com/docs/api/content#fixed-content
+     */
+    this.renderer.setAttribute(this.background, 'slot', 'fixed');
+
+    /**
+     * Give the newly created div a matching Content Attribute so it can by
+     * styled like everything else. See `getContentAttr()` for more.
+     */
+    this.renderer.setAttribute(this.background, this.getContentAttr(), '');
+
+    /**
+     * Give the div a class to be used in the component's SCSS.
+     */
+    this.renderer.addClass(this.background, 'parallax-background');
+
+    /**
+     * I'm not sure about this. I'm setting this larger than it should be
+     * to move the bottom bg off the screen. Once the user scrolls, it will
+     * be adjusted in relation to the scrollHeight and offsetHeight. For some
+     * reason, those are both 0 to start.
+     */
+    this.renderer.setStyle(this.background, 'height', `200%`);
+
+    /**
+     * Add the div to `ion-content`.
+     */
+    this.renderer.appendChild(this.content, this.background);
   }
 
   @HostListener('ionScroll', ['$event']) onContentScroll(event: ScrollCustomEvent) {
-    const scrollTop = event.detail.scrollTop;
 
-    /**
-     * When tweaking this number, we also have to consider the
-     * transitionDuration & transitionTimingFunction settings below.
-     */
-    let bgTop = -scrollTop * 0.5;
+    this.moveBackground();
 
-    /**
-     * If the background has been scrolled up and off the screen, bail out.
-     */
-    if (Math.abs(bgTop) > this.bg.offsetHeight) {
-      return;
-    }
+    // const movementFactor = 0.5;
 
-    this.domCtrl.write(() => {
-      /**
-       * The background scrolls up with the content, but we don't let
-       * it go down when rubberbanding or when pulling to refresh.
-       * This way, the background in the header properly matches up
-       * with the header in the content.
-       * TODO It would be cool to add a bottom drop shadow when you
-       * scroll up and remove it when you're at the top.
-       */
-      bgTop = scrollTop >= 0 ? bgTop : 0;
-      this.renderer.setStyle(this.bg, 'transform', `translateY(${bgTop}px)`);
-    });
+    // const {
+    //   /**
+    //    * We could also get this off of the ionScroll event, but since we're
+    //    * getting other values from getScrollElement(), might as well combine them.
+    //    */
+    //   scrollTop,
+    //   scrollHeight,
+    //   offsetHeight: contentHeight,
+    // } = await this.content.getScrollElement();
+
+
+    // // const scrollTop = event.detail.scrollTop;
+
+    // /**
+    //  * When tweaking this number, we also have to consider the
+    //  * transitionDuration & transitionTimingFunction settings below.
+    //  */
+    // let bgTop = -scrollTop * movementFactor;
+
+    // const bgHeight = ((scrollHeight - contentHeight) * movementFactor) + contentHeight;
+
+
+
+    // /**
+    //  * If the background has been scrolled up and off the screen, bail out.
+    //  */
+    // // if (Math.abs(bgTop) > this.bg.offsetHeight) {
+    // //   return;
+    // // }
+
+    // const scrollElement = await this.content.getScrollElement();
+    // // const scrollHeight = scrollElement.scrollHeight;
+    // // const contentHeight = scrollElement.offsetHeight;
+    // const howdyHeight = this.background.offsetHeight;
+    
+    // // const bgBottom = scrollHeight - scrollTop - howdyHeight; // exact
+    // const exact = scrollHeight - scrollTop - howdyHeight; // exact
+
+    // // close
+    // // const bgBottom = bgTop + scrollHeight - contentHeight - howdyHeight;
+
+    // const bottomZero = contentHeight - howdyHeight;
+
+
+    // // const bgBottom = ((-scrollTop - contentHeight) * movementFactor) + scrollHeight  - howdyHeight;
+    // // const bgBottom = ((-scrollTop - contentHeight - howdyHeight) * movementFactor) + scrollHeight  ;
+
+    // // const bgBottom = scrollHeight + Math.abs(scrollTop) - bottomZero;
+
+    // // works for 0.5
+    // // const bgBottom = (scrollHeight * movementFactor) - Math.abs(bgTop) + howdyHeight;
+
+
+    // // const bgBottom = (scrollHeight * (1 - movementFactor)) - scrollTop + contentHeight - howdyHeight;
+    
+    // // const bgBottom = contentHeight + (scrollHeight * (1 - movementFactor)) + bgTop;
+
+
+    // console.log({
+    //   scrollTop,
+    //   scrollHeight,
+    //   // howdyHeight,
+    //   bgTop,
+    //   // bgBottom,
+    //   contentHeight,
+    //   exact
+    // });
+  
+
+    // this.domCtrl.write(() => {
+    //   /**
+    //    * The background scrolls up with the content, but we don't let
+    //    * it go down when rubberbanding or when pulling to refresh.
+    //    * This way, the background in the header properly matches up
+    //    * with the header in the content.
+    //    * TODO It would be cool to add a bottom drop shadow when you
+    //    * scroll up and remove it when you're at the top.
+    //    */
+    //   bgTop = scrollTop >= 0 ? bgTop : 0;
+    //   // this.renderer.setStyle(this.bg, 'transform', `translateY(${bgTop}px)`);
+
+
+    //   // This is just attached...no moveFactor
+    //   // this.renderer.setStyle(this.newDiv, 'height', `${scrollHeight}px`);
+    //   // this.renderer.setStyle(this.newDiv, 'transform', `translateY(${-scrollTop}px)`);
+
+
+    //   // const newHeight =  ((scrollHeight - contentHeight) * (movementFactor)) + contentHeight;
+    //   console.log({bgHeight});
+    //   this.renderer.setStyle(this.background, 'height', `${bgHeight}px`);
+    //   this.renderer.setStyle(this.background, 'transform', `translateY(${bgTop}px)`);
+    // });
   }
 
   ngOnInit(): void {
+
     // console.log(`appBgScroll>ngOnInit`, this.bg);
     /**
      * might need this.domCtrl.read() to get the toolbar height if I want to
@@ -71,7 +191,8 @@ export class BgScrollDirective implements OnInit {
      * still see janky-ness with it. The transitionDuration below
      * is what really smooths things out.
      */
-     this.renderer.setStyle(this.bg, 'will-change', 'transform');
+    //  this.renderer.setStyle(this.bg, 'will-change', 'transform');
+     this.renderer.setStyle(this.background, 'will-change', 'transform');
 
      /**
       * We add a slight duration to the the animation transition so the
@@ -85,9 +206,114 @@ export class BgScrollDirective implements OnInit {
       * <60ms the animation is a little janky.
       * >100ms the lag is noticeable, especially with quick scrolls.
       */
-     this.renderer.setStyle(this.bg, 'transitionDuration', '70ms');
-     this.renderer.setStyle(this.bg, 'transitionTimingFunction', 'ease-out');
+     this.renderer.setStyle(this.background, 'transitionDuration', '70ms');
+     this.renderer.setStyle(this.background, 'transitionTimingFunction', 'ease-out');
   }
+
+  async ngAfterViewInit() {
+    /**
+     * I don't know if this is needed. It doesn't work as well as I thought
+     * because the ion-content heights aren't correct here anyway. And this
+     * defeats the purpose of creating a separate moveBackground function if
+     * calling it here doesn't work anyway.
+     * 
+     * TODO Get rid of moveBackground and put everything back in the listenter?
+     */
+    setTimeout(() => {
+      this.moveBackground();
+    }, 250);
+
+    // console.log('ngAfterViewInit', await this.content.getScrollElement());
+  }
+
+  async moveBackground() {
+
+    const {
+      /**
+       * We could also get this off of the ionScroll event, but since we're
+       * getting other values from getScrollElement(), might as well combine them.
+       */
+      scrollTop = 0,
+      offsetHeight, // Height of the ion-content
+      scrollHeight, // Height of all the scrollable content
+    } = await this.content.getScrollElement();
+
+    console.log({scrollTop, offsetHeight, scrollHeight});
+
+    /**
+     * When scrolling, we move the background at a slower rate than the
+     * content to achieve the parallax effect.
+     *
+     * When tweaking this number, we also have to consider the
+     * transitionDuration & transitionTimingFunction settings below.
+     */
+    const movementFactor = 0.5;
+
+    /**
+     * TODO Explain this better.
+     * To achieve the parallax effect, the background needs to be smaller than the
+     * scroll content
+     * 
+     * scrollHeight - offsetHeight is the maxScrollDistance
+     * muliplied by movementFactor is the maximum the smaller bg can move
+     * add back in the offsetHeight (height of the view) gives us the new bg height
+     */
+    const backgroundHeight = ((scrollHeight - offsetHeight) * movementFactor) + offsetHeight;
+
+    /**
+     * rename? negativeYTranslation?
+     * TODO Make scrollTop negative and mulitply by factor to get value for translateY
+     */
+    let bgTop = -scrollTop * movementFactor;
+
+    /**
+     * Just like we prevent rubberbanding at the top, we will do it for the bottom.
+     * scrollBottomMax is as far as the scroll content can be pushed up.
+     * 
+     * Call this "maxScrollDistance"?
+     * Move this before backgroundHeight and use this variable in there?
+     */
+    const scrollBottomMax = scrollHeight - offsetHeight;
+
+    /**
+     * This is as far as we want to allow the background div to move.
+     */
+    const bgTopForBottomMax = -scrollBottomMax * movementFactor;
+
+    /**
+     * If the background has been scrolled up and off the screen, bail out.
+     */
+    // if (Math.abs(bgTop) > this.bg.offsetHeight) {
+    //   return;
+    // }
+
+
+    this.domCtrl.write(() => {
+      /**
+       * The background scrolls up with the content, but we don't let
+       * it go down when rubberbanding or when pulling to refresh.
+       * This way, the background in the header properly matches up
+       * with the header in the content.
+       * TODO It would be cool to add a bottom drop shadow when you
+       * scroll up and remove it when you're at the top.
+       */
+      // bgTop = scrollTop >= 0 ? bgTop : 0;
+
+      console.log({scrollBottomMax, bgTop});
+
+
+      if (scrollTop < 0) {
+        bgTop = 0;
+      } else if (scrollTop > scrollBottomMax) {
+        // bgTop = -maybe;
+        bgTop = bgTopForBottomMax;
+      }
+
+      this.renderer.setStyle(this.background, 'height', `${backgroundHeight}px`);
+      this.renderer.setStyle(this.background, 'transform', `translateY(${bgTop}px)`);
+    });
+  }
+
 
   /**
    * Angular View Encapsulation creates unique _nghost and _ngcontent ids

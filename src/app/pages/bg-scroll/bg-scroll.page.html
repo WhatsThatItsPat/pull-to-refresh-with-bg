@@ -7,9 +7,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content scrollEvents="true" [appBgScroll]="bg">
+<ion-content appBgScroll>
 
-  <div id="bg" #bg slot="fixed">
+  <!-- <div id="bg" #bg slot="fixed"> -->
     <!--
       This is all required to prevent an ugly gap from appearing
       between the header background and the content background when
@@ -28,7 +28,7 @@
       is normally behind the content and bg, but we want it to
       be between the two.
     -->
-  </div>
+  <!-- </div> -->
 
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <!-- <ion-refresher-content></ion-refresher-content> -->
