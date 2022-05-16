@@ -24,3 +24,52 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+ion-content[appBgScroll] {
+  /*
+    We need to make sure layers are ordered correctly for refreshers
+    to work with our header-to-content-bleeding-background. The content
+    needs to be above the refresher, which is above the background.
+
+    The refresher z-index defaults to -1 on iOS so it's behind the
+    background part. This is usually OK because the background is
+    pulled down with the content. We are intentionally preventing
+    that, so we need it to be above the background (both the original
+    background part and our custom parallax background).
+    
+    On Android, z-index defaults to 1, and the refresher shows up over
+    the content which can't be pulled down (right?). The refresher just
+    sneaks out from under the header. I think we are using the iOS look
+    on Android and the pull-to-refresh pulls the content down (does
+    rubber banding work too?).
+
+    NOTE: An important note here is that we don't want to allow Ionic
+    to use the native refreshers. Our use is custom enough that this
+    won't work:
+
+        <ion-refresher-content></ion-refresher-content>
+
+    Rather, we want to customize the icons. The more Android-esque
+    spinner matches our other spinners. But the main point is that
+    customizing them forces Ionic to use the HTML versionn which
+    we need for our layering:
+    
+        <ion-refresher-content
+          pullingIcon="arrow-down"
+          refreshingSpinner="circular">
+        </ion-refresher-content>
+  */
+  &::part(scroll) {
+    z-index: 10;
+  }
+  ion-refresher {
+    z-index: 0;
+  }
+  .parallax-background {
+    z-index: -10;
+  }
+  &::part(background) {
+    z-index: -20;
+  }
+}

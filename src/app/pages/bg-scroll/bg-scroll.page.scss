@@ -18,24 +18,8 @@ ion-toolbar {
 ion-content {
 
   .parallax-background {
-    // background-color: rgba(255, 166, 0, 0.476);
-    // height: 200px;
-
-    /* The height will be set on scroll events, but it should be set when
-    the page initializes and maybe when things are resized (not just the
-    window, but when the content changes size. */
-    height: 100%; // this needs w
-
-
+    /* We shouldn't set the height. It will be set dynamically by the directive. */
     width: 100%;
-    // top: 0;
-    // bottom: -200px;
-    z-index: 1;
-
-    // margin-top: calc(-44px - env(safe-area-inset-top));
-    // background:
-    //   url('/assets/bg-top.svg') no-repeat center top,
-    //   url('/assets/bg-bottom.svg') no-repeat center bottom local;
 
     background-image:
       url('/assets/bg-top.svg'),
@@ -48,57 +32,13 @@ ion-content {
     background-position:
       center calc(-44px - env(safe-area-inset-top)),
       center bottom;
-
   }
 
-  /**
-   * We had to set the `--background` Custom Property to `none` in
-   * order to use the standard CSS `background`, but I don't think
-   * it's necessary anymore because the top bg is in a fixed div
-   * and the bottom bg is in `part(scroll)`.
-   * Also, setting it to none cause the bg to be black on an iOS
-   * device, even after the dark mode styles have been turned off.
-   */
-  // --background: none;
   --background: white;
-  
-  #bg {
-    width: 100%;
-    /*
-      This height doesn't matter as long as it's taller than the bg image.
-      ...actually, it does now since I'm returning from the function
-      once the image has been scrolled off screen.
-    */
-    // height: 100%;
-    height: 510px;
-
-    /*
-      I think we want to separate the calc from the background (i.e. not
-      manipulate the position of the bg image).
-    */
-    // margin-top: calc(-44px - env(safe-area-inset-top));
-    // background: url('/assets/bg-top.svg') no-repeat center top;
-  }
-
-  // We can target the 'scroll' part within the shadow root of ion-content
-  &::part(scroll) {
-    // We can set this z-index above ion-refresher so the icon doesn't show
-    z-index: 3; // 2
-    // We can also attach the bottom bg image to the bottom of the page.
-    // background: url('/assets/bg-bottom.svg') no-repeat center bottom local;
-  }
 
   // just to see through the cards
   .transparent {
     background-color: rgba(255, 255, 255, 0.70);
   }
   
-}
-
-// .ios
-ion-refresher {
-  // This z-index defaults to -1 (on iOS), but then it's behind the background.
-  // What could changing the z-index mess up?
-  z-index: 2; // 1
-  // On Android the default is z-index:1 and we don't want to change it.
 }
