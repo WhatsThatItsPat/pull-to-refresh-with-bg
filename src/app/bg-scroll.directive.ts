@@ -60,35 +60,25 @@ export class BgScrollDirective implements AfterViewInit {
     this.renderer.addClass(this.background, 'parallax-background');
 
     /**
-     * We won't know the sizes required to figure out how tall the backround
-     * should be until after the `componentOnReady` checks in `ngAfterViewInit`.
-     * We set it to 200% just to push any bottom backgrounds off the screen
-     * where they are more likely to be. Otherwise, we'll see the bottom
-     * background show up at the bottom as if the height is 100%, before it
-     * quickly disappears when the sizing is figured out.
-     */
-    this.renderer.setStyle(this.background, 'height', '200%');
-
-    /**
      * https://www.youtube.com/watch?v=yOWB4P1Nz9A
      * This technique reduces paints as shown in the video, but I
      * still see janky-ness with it. The `transitionDuration` below
      * is what really smooths things out.
      */
-     this.renderer.setStyle(this.background, 'will-change', 'transform');
+    this.renderer.setStyle(this.background, 'will-change', 'transform');
 
-     /**
-      * We add a slight duration to the the animation transition so the
-      * background parallax scrolling is smoother. Without this, there
-      * is a noticeable stutter. By adding it, the background is just barely
-      * playing catch-up to the scroll content. The default easing function
-      * is `ease`, which is similar to `ease-in-out`. We switch to `ease-out`
-      * because it works better with the catching-up idea.
-      *
-      * 70ms feels about right on iPhone 13 Pro / iOS 15.4.1
-      * <60ms the animation is a little janky.
-      * >100ms the lag is noticeable, especially with quick scrolls.
-      */
+    /**
+     * We add a slight duration to the the animation transition so the
+     * background parallax scrolling is smoother. Without this, there
+     * is a noticeable stutter. By adding it, the background is just barely
+     * playing catch-up to the scroll content. The default easing function
+     * is `ease`, which is similar to `ease-in-out`. We switch to `ease-out`
+     * because it works better with the catching-up idea.
+     *
+     * 70ms feels about right on iPhone 13 Pro / iOS 15.4.1
+     * <60ms the animation is a little janky.
+     * >100ms the lag is noticeable, especially with quick scrolls.
+     */
     this.renderer.setStyle(this.background, 'transitionDuration', '70ms');
     this.renderer.setStyle(this.background, 'transitionTimingFunction', 'ease-out');
 
