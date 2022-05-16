@@ -12,7 +12,7 @@ export class BgScrollDirective implements OnInit, AfterViewInit {
 
 
   constructor(
-    private domCtrl: DomController,
+    private domController: DomController,
     private renderer: Renderer2,
     private el: ElementRef,
   ) {
@@ -212,28 +212,33 @@ export class BgScrollDirective implements OnInit, AfterViewInit {
 
   async ngAfterViewInit() {
     /**
-     * I don't know if this is needed. It doesn't work as well as I thought
-     * because the ion-content heights aren't correct here anyway. And this
-     * defeats the purpose of creating a separate moveBackground function if
-     * calling it here doesn't work anyway.
-     * 
-     * TODO Get rid of moveBackground and put everything back in the listenter?
+     * Here's a reported bug and long discussion about child components
+     * of `ion-content` having zero sizes, which is related to what I'm
+     * doing with a directive (though I think the issue exists for IonContent
+     * itself and it isn't specifically related to children).
+     * https://github.com/ionic-team/ionic-framework/issues/17920
+     *
+     * Checking for componentOnReady on both `ion-app` and `ion-content` seems
+     * to work the best (actually, I think the `ion-app` one does the trick by
+     * itself). Without these, I can hit refresh over and over and sometimes the
+     * sizes work, sometimes not.
+     *
+     * In normal use of an app (with normal loading, navigation, etc.), this probably
+     * isn't a big deal anyway, but it's noticeable when refreshing on the same page.
      */
-    setTimeout(() => {
-      this.moveBackground();
-    }, 250);
-
-    // console.log('ngAfterViewInit', await this.content.getScrollElement());
+    await document.querySelector('ion-app').componentOnReady();
+    await document.querySelector('ion-content').componentOnReady();
+    console.log('BgScrollDirective ngAfterViewInit after ion-app & ion-content componentOnReady');
+    this.moveBackground();
   }
 
   async moveBackground() {
-
     const {
       /**
        * We could also get this off of the ionScroll event, but since we're
        * getting other values from getScrollElement(), might as well combine them.
        */
-      scrollTop = 0,
+      scrollTop,
       offsetHeight, // Height of the ion-content
       scrollHeight, // Height of all the scrollable content
     } = await this.content.getScrollElement();
@@ -288,7 +293,7 @@ export class BgScrollDirective implements OnInit, AfterViewInit {
     // }
 
 
-    this.domCtrl.write(() => {
+    this.domController.write(() => {
       /**
        * The background scrolls up with the content, but we don't let
        * it go down when rubberbanding or when pulling to refresh.

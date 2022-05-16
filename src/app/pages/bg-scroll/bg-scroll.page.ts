@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { IonContent, RefresherCustomEvent } from '@ionic/angular';
 
 @Component({
@@ -6,7 +6,7 @@ import { IonContent, RefresherCustomEvent } from '@ionic/angular';
   templateUrl: './bg-scroll.page.html',
   styleUrls: ['./bg-scroll.page.scss'],
 })
-export class BgScrollPage implements OnInit {
+export class BgScrollPage implements OnInit, AfterViewInit {
 
   @ViewChild(IonContent) content: IonContent;
 
@@ -14,6 +14,23 @@ export class BgScrollPage implements OnInit {
 
   ngOnInit() {
     // console.log(`ngOnInit content`, this.content);
+  }
+
+  async ngAfterViewInit() {
+    const {
+      scrollTop ,
+      offsetHeight,
+      scrollHeight,
+    } = await this.content.getScrollElement();
+    console.log(
+      `BgScrollPage ngAfterViewInit`,
+      this.content,
+      {
+        scrollTop,
+        offsetHeight,
+        scrollHeight,
+      }
+    );
   }
 
   doRefresh(event){
