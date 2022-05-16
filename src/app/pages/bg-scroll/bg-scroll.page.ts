@@ -23,7 +23,7 @@ export class BgScrollPage implements OnInit, AfterViewInit {
       scrollHeight,
     } = await this.content.getScrollElement();
     console.log(
-      `BgScrollPage ngAfterViewInit`,
+      `BgScrollPage ngAfterViewInit content`,
       this.content,
       {
         scrollTop,
