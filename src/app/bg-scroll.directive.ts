@@ -6,11 +6,6 @@ import { DomController, IonContent, ScrollCustomEvent } from '@ionic/angular';
 })
 export class BgScrollDirective implements AfterViewInit {
 
-  /**
-   * TODO It would be cool to add a bottom drop shadow to the header when
-   * you start scrolling and remove it when you're back at the top.
-   */
-
   content: IonContent;
   background: HTMLDivElement;
 
@@ -193,15 +188,17 @@ export class BgScrollDirective implements AfterViewInit {
        */
       if (scrollTop < 0) {
         /**
-         * The top limit is easy to figure out. If `scrollTop` drops below
-         * zero, we just set it to zero.
+         * The top limit is easy to figure out because it's the same for both
+         * the scroll area and the background. If `scrollTop` is srolled past zero,
+         * we stop the background at zero.
          */
         bgTop = 0;
       } else if (scrollTop > maxScrollDistance) {
         /**
-         * When we rubberband past the bottom, `scrollTop` will exceed
-         * the `maxScrollDistance`. We've already figured out the
-         * `maxScrollDistanceOfBackground` but we have to flip it to negative.
+         * When the scrollable content rubberbands past the bottom, `scrollTop` will
+         * exceed the `maxScrollDistance`. We've already translated that measurment to
+         * the smaller background  with `maxScrollDistanceOfBackground` but we have to
+         * flip it to negative.
          */
         bgTop = -maxScrollDistanceOfBackground;
       }
@@ -214,9 +211,25 @@ export class BgScrollDirective implements AfterViewInit {
        */
       this.renderer.setStyle(this.background, 'height', `${backgroundHeight}px`);
       this.renderer.setStyle(this.background, 'transform', `translateY(${bgTop}px)`);
+
+      /**
+       * Add a closs which we can use to add a header drop shadow in the global
+       * styles (actually, it's an inset shadow on `ion-content` that looks like
+       * it's from the header).
+       *
+       * The top card has a 24px margin, so this is the same as the space
+       * between the header and the content. This looks fine using zero,
+       * but looks nice when the drop shadow appears right when the content
+       * starts going underneath the header.
+       */
+      if (scrollTop > 24) {
+        this.renderer.addClass(this.content, 'content-is-scrolling');
+      } else {
+        this.renderer.removeClass(this.content, 'content-is-scrolling');
+      }
+
     });
   }
-
 
   /**
    * Angular View Encapsulation creates unique _nghost and _ngcontent IDs

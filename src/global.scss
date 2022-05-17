@@ -29,8 +29,9 @@
 ion-content[appBgScroll] {
   /*
     We need to make sure layers are ordered correctly for refreshers
-    to work with our header-to-content-bleeding-background. The content
-    needs to be above the refresher, which is above the background.
+    to work with our header-to-content-bleeding-background. The fake
+    header drop shadow needs to be above the content, which needs to
+    be above the refresher, which is above the background.
 
     The refresher z-index defaults to -1 on iOS so it's behind the
     background part. This is usually OK because the background is
@@ -60,6 +61,25 @@ ion-content[appBgScroll] {
           refreshingSpinner="circular">
         </ion-refresher-content>
   */
+
+  /* This is an inset shadow that looks like a header drop shadow. */
+  &::before {
+    pointer-events: none;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    z-index: 20;
+    top: 0;
+    box-shadow: inset 0px 10px 10px -10px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.2s linear;
+  }
+  /* This class is added in the BgScrollDirective...which I think I'll
+      rename to ParallaxBackgroundDirective */
+  &.content-is-scrolling::before {
+    opacity: 1;
+  }
   &::part(scroll) {
     z-index: 10;
   }
@@ -71,5 +91,8 @@ ion-content[appBgScroll] {
   }
   &::part(background) {
     z-index: -20;
+    /* Should I set the color for this here? Or up a parent
+        with `--background`? */
+    // background-color: white;
   }
 }
