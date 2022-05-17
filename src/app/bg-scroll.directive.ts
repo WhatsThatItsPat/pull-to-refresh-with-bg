@@ -45,9 +45,9 @@ export class BgScrollDirective implements AfterViewInit {
 
     /**
      * Give the newly created div a matching Content Attribute so it can be
-     * styled like everything else. See `getContentAttr()` for more.
+     * styled like everything else. See `getContentAttribute()` for more.
      */
-    this.renderer.setAttribute(this.background, this.getContentAttr(), '');
+    this.renderer.setAttribute(this.background, this.getContentAttribute(), '');
 
     /**
      * Give the div a class to be used in the component's SCSS.
@@ -253,7 +253,7 @@ export class BgScrollDirective implements AfterViewInit {
    * the app runs, so we could never know or use that specific value), so I think
    * we're OK.
    */
-   getContentAttr(): string {
+   getContentAttribute(): string {
     return [
       // Turn NamedNodeMap into an array so we can use `find()`
       ...this.el.nativeElement.attributes
