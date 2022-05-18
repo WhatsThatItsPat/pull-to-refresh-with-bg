@@ -2,7 +2,7 @@ import { AfterViewInit, Directive, ElementRef, HostListener, Renderer2 } from '@
 import { DomController, IonContent, ScrollCustomEvent } from '@ionic/angular';
 
 @Directive({
-  selector: '[appBgScroll]'
+  selector: 'ion-content[appBgScroll]'
 })
 export class BgScrollDirective implements AfterViewInit {
 
