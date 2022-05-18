@@ -73,12 +73,13 @@ ion-content[appBgScroll] {
     top: 0;
     box-shadow: inset 0px 10px 10px -10px rgba(0, 0, 0, 0.5);
     opacity: 0;
-    transition: opacity 0.2s linear;
+    transition: opacity 125ms linear;
   }
   /* This class is added in the BgScrollDirective...which I think I'll
       rename to ParallaxBackgroundDirective */
   &.content-is-scrolling::before {
     opacity: 1;
+    transition-duration: 350ms;
   }
   &::part(scroll) {
     z-index: 10;
