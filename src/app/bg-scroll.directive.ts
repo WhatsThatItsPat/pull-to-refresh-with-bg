@@ -1,6 +1,12 @@
 import { AfterViewInit, Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { DomController, IonContent, ScrollCustomEvent } from '@ionic/angular';
 
+/**
+ * This directive works with some styling in global.scss under
+ *    ion-content[appBgScroll] { ... }
+ * There's are several z-index adjutments to get layering to
+ * work with the refresher.
+ */
 @Directive({
   selector: 'ion-content[appBgScroll]'
 })
@@ -53,6 +59,11 @@ export class BgScrollDirective implements AfterViewInit {
      * Give the div a class to be used in the component's SCSS.
      */
     this.renderer.addClass(this.background, 'parallax-background');
+
+    /**
+     * Set the width so we don't have to in each page's SCSS.
+     */
+    this.renderer.setStyle(this.background, 'width', '100%');
 
     /**
      * https://www.youtube.com/watch?v=yOWB4P1Nz9A

@@ -19,7 +19,7 @@ ion-content {
 
   .parallax-background {
     /* We shouldn't set the height. It will be set dynamically by the directive. */
-    width: 100%;
+    // width: 100%;
 
     background-image:
       url('/assets/bg-top.svg'),
@@ -37,8 +37,8 @@ ion-content {
   --background: white;
 
   // just to see through the cards
-  .transparent {
-    background-color: rgba(255, 255, 255, 0.70);
-  }
+  // .transparent {
+  //   background-color: rgba(255, 255, 255, 0.70);
+  // }
   
 }
