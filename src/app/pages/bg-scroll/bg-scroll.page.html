@@ -9,27 +9,6 @@
 
 <ion-content appBgScroll>
 
-  <!-- <div id="bg" #bg slot="fixed"> -->
-    <!--
-      This is all required to prevent an ugly gap from appearing
-      between the header background and the content background when
-      using pull-to-refresh. It also lets us get fancy with parallax.
-
-      ion-content needs scrollEvents enabled, and it needs the
-      #bg template reference passed to the appBgScroll directive.
-
-      The directive reacts to the scroll events by changing the
-      position of the background of this div.
-      
-      The bg id is used in the CSS to set the image, etc.
-
-      Using slot="fixed" keeps this div at the top and the CSS
-      helps layer things accordingly with z-index. The referesher
-      is normally behind the content and bg, but we want it to
-      be between the two.
-    -->
-  <!-- </div> -->
-
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <!-- <ion-refresher-content></ion-refresher-content> -->
     <ion-refresher-content
@@ -62,12 +41,13 @@
   </ion-card>
   
   
-  <ion-card *ngFor="let blah of [].constructor(8)" class="transparent">
+  <ion-card *ngFor="let blah of [].constructor(numOfRepeatingCards)" class="transparent">
     <ion-card-header>
       <ion-card-title>header/title</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque autem assumenda, amet ipsum inventore earum eveniet reiciendis, dolor accusamus non voluptate, temporibus expedita odio quibusdam distinctio repellendus tenetur deleniti hic.
+      <ion-button (click)="numOfRepeatingCards = numOfRepeatingCards + 1">add</ion-button>
     </ion-card-content>
   </ion-card>
 

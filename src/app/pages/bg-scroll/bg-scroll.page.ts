@@ -10,6 +10,8 @@ export class BgScrollPage implements OnInit, AfterViewInit {
 
   @ViewChild(IonContent) content: IonContent;
 
+  numOfRepeatingCards = 5;
+
   constructor() { }
 
   ngOnInit() {
