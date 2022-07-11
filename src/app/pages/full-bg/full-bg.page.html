@@ -1,0 +1,24 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Full BG</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-down"
+      refreshingSpinner="circular">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card class="hey" *ngFor="let x of [].constructor(10)">
+    <ion-card-content>
+      Lorem ipsum dolor sit <a [routerLink]="" (click)="clickLink()">amet</a> consectetur adipisicing elit. Deserunt, sed hic atque non vel quibusdam saepe in esse quos repudiandae? Error temporibus aspernatur qui nihil quae explicabo est quasi officia?
+    </ion-card-content>
+  </ion-card>
+</ion-content>

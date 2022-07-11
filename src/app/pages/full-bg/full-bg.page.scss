@@ -1,0 +1,64 @@
+:host {
+  /* Our tall content backgrounds have a content image that bleeds from
+  the header to the content. These shorter backgrounds only have a header
+  image (no content image) but the negative space of the wave bleeds from
+  the header to the content.
+
+  To make the content scroll under the header so we can see the content
+  in the negative space, we set `fullscreen="true"` on `ion-content`.
+
+  Using fullscreen along with Ionic's `--background` custom property will
+  cover the refresher. There's an open issue about this:
+  https://github.com/ionic-team/ionic-framework/issues/18714
+
+  Additionally, if there is a differnce between the bg of the content and
+  the bg of the page, this will be noticed when pulling down. This is
+  because the background is pulled down along with the content when you
+  pull down the refresher,
+
+  So, to set a background (likely a color, but could be an image) that works
+  with the refresher, we have to set it here. This will add a background
+  to `ion-page`. And on `ion-content`, we turn off Ionic's `--background`
+  custom property variable (i.e. set it to `none`). This allows the area
+  under the wave that is still in the header to share the same background
+  as the content because it's behind both the header and the content. And
+  this background won't be pulled down with the refresher. */
+  // background-color: lightgreen;
+  background-color: white;
+}
+
+ion-header {
+  /* The `ion-no-border` is added to the template. Can it be extended
+  and added here? */
+  ion-toolbar {
+    /* Turn off Ionic's custom property because we are going to get
+    fancier and put an SVG on `ion-header` instead. */
+    --background: none;
+  }
+
+  /* Increase the height of the header to match the height of the
+  image. This will automatically push down the content of `ion-content`
+  the same amount. */
+  height: 150px;
+
+  background-image: url('/assets/BG-Header-Crypto.svg');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 100% 150px;
+
+  /* The drop shadow could be part of the SVG. Which way to do this could
+  be determined by if we want to only show the shadow when scrolling. */
+  filter: drop-shadow(0px 3px 6px rgb(0 0 0 / 0.4));
+}
+
+ion-content {
+  /* As explained above, the custom property on will cover the refresher,
+  so we turn it off. */
+  --background: none;
+  ion-refresher {
+    /* This isn't really necessary, but because the header wave has negative
+    space in the middle of the image, we can pull the refresher up a little
+    to sit in that space. */
+    top: -30px;
+  }
+}

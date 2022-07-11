@@ -39,6 +39,10 @@ const routes: Routes = [
     path: 'bg-scroll',
     loadChildren: () => import('./pages/bg-scroll/bg-scroll.module').then( m => m.BgScrollPageModule)
   },
+  {
+    path: 'full-bg',
+    loadChildren: () => import('./pages/full-bg/full-bg.module').then( m => m.FullBgPageModule)
+  },
 ];
 
 @NgModule({
